@@ -1,0 +1,9 @@
+/* dono: A -> a1,a2,a6,final; B -> a3,a4,a5 */
+.a3-grade { display: grid; grid-template-columns: repeat(4, 2.6rem); gap: 4px; }
+.a3-botao { width: 2.6rem; height: 2.6rem; padding: 0; box-sizing: border-box; font-size: 1.3rem; }
+/* apagado: parece texto morto, mas é clicável (a resposta mora aqui) */
+.a3-botao { background: transparent; border: 0; box-shadow: none; color: var(--ink-soft); cursor: default; opacity: .75; }
+/* aceso: único com cara de botão */
+.a3-botao.aceso { background: #fffaf0; border: 2px solid var(--brass-dark); border-radius: 6px; box-shadow: 0 2px 4px #0004; color: #000; cursor: pointer; opacity: 1; }
+.a3-grade.piscar .a3-botao.aceso { animation: shake .3s 6; }
+.a3-botao.marcado { background: var(--brass-light); box-shadow: 0 0 0 2px var(--wine); }

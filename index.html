@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>visite 2026</title>
+
+    <script type="module" src="js/core/main.js"></script>
+    <script type="module" src="js/core/notebook.js"></script>
+    <script type="module" src="js/core/vitoria.js"></script>
+
+    <script type="module" src="js/puzzles/a1.js"></script>
+    <script type="module" src="js/puzzles/a2.js"></script>
+    <script type="module" src="js/puzzles/a3.js"></script>
+    <script type="module" src="js/puzzles/a4.js"></script>
+    <script type="module" src="js/puzzles/a5.js"></script>
+    <script type="module" src="js/puzzles/a6.js"></script>
+    <script type="module" src="js/puzzles/final.js"></script>
+
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/core/notebook.css">
+    <link rel="stylesheet" href="css/puzzles/a1.css">
+    <link rel="stylesheet" href="css/puzzles/a2.css">
+    <link rel="stylesheet" href="css/puzzles/a3.css">
+    <link rel="stylesheet" href="css/puzzles/a4.css">
+    <link rel="stylesheet" href="css/puzzles/a5.css">
+    <link rel="stylesheet" href="css/puzzles/a6.css">
+    <link rel="stylesheet" href="css/puzzles/final.css">
+</head>
+<body>
+    <header>
+        <div>
+            <p>
+                <button class="restart">Reiniciar</button>
+            </p>
+        </div>
+        <div id="watch"></div>
+    </header>
+
+    <main>
+        <button id="arrow-left" aria-label="Face anterior">◀</button>
+        <div class="scene">
+            <div class="cube">
+                <section class="face" data-face="1" style="--n:0">
+                    <div class="painel" id="a1">
+                        <h2>Enigma 1</h2>
+                        <div class="conteudo"></div>
+                    </div>
+                    <div class="painel" id="a2">
+                        <h2>Enigma 2</h2>
+                        <div class="conteudo"></div>
+                    </div>
+                </section>
+                <section class="face" data-face="2" style="--n:1">
+                    <div class="painel" id="a3">
+                        <h2>Enigma 3</h2>
+                        <div class="conteudo"></div>
+                    </div>
+                    <div class="painel" id="a4">
+                        <h2>Enigma 4</h2>
+                        <div class="conteudo"></div>
+                    </div>
+                </section>
+                <section class="face" data-face="3" style="--n:2">
+                    <div class="painel" id="a5">
+                        <h2>Enigma 5</h2>
+                        <div class="conteudo"></div>
+                    </div>
+                    <div class="painel" id="a6">
+                        <h2>Enigma 6</h2>
+                        <div class="conteudo"></div>
+                    </div>
+                </section>
+                <section class="face face-final" data-face="4" style="--n:3">
+                    <div class="painel" id="final">
+                        <h2>Enigma FINAL</h2>
+                        <div class="conteudo"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <button id="arrow-right" aria-label="Próxima face">▶</button>
+    </main>
+
+    <!-- Caderninho do Player 1 -->
+
+    <button id="notebook-toggle" aria-label="Abrir caderninho" title="Caderninho"><svg class="icone" aria-hidden="true"><use href="assets/icones.svg#caderno"></use></svg></button>
+    <div class="centralizer" id="notebook-modal">
+        <aside id="notebook" class="modal" aria-label="Caderninho de anotações">
+            <button id="notebook-close" aria-label="Fechar caderninho">✕</button>
+            <div class="nb-colunas">
+                <section class="nb-escrever" aria-label="Anotações livres">
+                    <h3>Anotações</h3>
+                    <textarea id="notebook-text" aria-label="Anotações livres" placeholder="Escreva o que quiser..."></textarea>
+                </section>
+                <section class="nb-frases" aria-label="Enigmas resolvidos">
+                    <h3>Enigmas resolvidos</h3>
+                    <ol id="notebook-shelf"></ol>
+                </section>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modais -->
+
+    <div class="centralizer" id="init-modal">
+        <div class="modal">
+            <h2>VISITE 2026</h2>
+
+            <p>7 enigmas e um manual.</p>
+            <p>
+                Você e sua dupla devem se ajudar para resolver os enigmas que preparamos e descobrir o que esta caixa esconde:
+                um de vocês fica cara a cara com os enigmas enquanto o outro guia pelo manual, sem ver a tela do outro.
+                O Player 1 ainda tem um caderninho (botão no canto inferior direito) para anotar tudo pelo caminho.
+            </p>
+
+            <button id="start">Iniciar</button>
+            <a class="manual-link" href="manual.html">Ver manual</a>
+        </div>
+    </div>
+
+    <!-- <div class="modal" id="winModal"></div> -->
+    <!-- O conteúdo da vitória estará dentro da caixa -->
+
+    <div class="centralizer" id="win-modal">
+        <div class="modal">
+            <h2 id="win-titulo">Enigma concluído!</h2>
+            <p><em id="win-frase"></em></p>
+            <p id="win-nota">Uma dica foi guardada no caderninho de anotações.</p>
+            <p id="win-tempo" hidden></p>
+            <button id="win-ok">Continuar</button>
+        </div>
+    </div>
+
+    <div class="centralizer" id="loss-modal">
+        <div class="modal">
+            <h2>Tempo esgotado</h2>
+            <p>Mas sempre dá para tentar de novo.</p>
+            <button class="restart">Reiniciar</button>
+        </div>
+    </div>
+</body>
+</html>

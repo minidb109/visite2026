@@ -1,0 +1,564 @@
+/* ========== VISITE 2026 — visual da caixa ========== */
+
+:root {
+  --wood-1: #4a2e1a;
+  --wood-2: #2b1a0e;
+  --wood-3: #1a0f07;
+  --brass: #c9a24b;
+  --brass-light: #f3dc9a;
+  --brass-dark: #7a5a1e;
+  --parch-1: #f7edd2;
+  --parch-2: #e9d6a9;
+  --ink: #2a1b0e;
+  --ink-soft: #6b5a45;
+  --wine: #8a2323;
+  --serif: Georgia, "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+* {
+  font-family: var(--serif);
+}
+
+/* ---------- Fundo ---------- */
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background-color: #222;
+  background-image: url("../assets/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* vinheta: escurece as bordas e faz a caixa ganhar destaque */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, .05) 35%, rgba(0, 0, 0, .65) 100%);
+}
+
+/* ---------- Topo ---------- */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 10px 15px;
+  background: transparent;
+}
+
+header p {
+  margin: 0;
+}
+
+h1 {
+  margin: 5px;
+}
+
+#seals {
+  margin: auto;
+  width: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 30px;
+  text-align: center;
+  background-color: gray;
+  color: #FFD700;
+}
+
+#watch {
+  width: fit-content;
+  min-width: 4.5rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--brass-dark);
+  background: linear-gradient(180deg, #1c1208, #0d0804);
+  box-shadow: inset 0 0 0 1px rgba(243, 220, 154, .25), 0 4px 14px #0008;
+  color: var(--brass-light);
+  text-shadow: 0 0 8px rgba(243, 220, 154, .55);
+  font: bold 20px "Courier New", monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .08em;
+  text-align: center;
+}
+
+#watch:empty {
+  visibility: hidden;
+}
+
+#watch.red-alert {
+  color: #fff;
+  text-shadow: 0 0 8px #ff6a6a;
+  border-color: #ff5a5a;
+  background: linear-gradient(180deg, #b01212, #7a0808);
+  animation: pulso 1s ease-in-out infinite;
+}
+
+@keyframes pulso {
+  50% { box-shadow: 0 0 0 1px rgba(255, 120, 120, .6), 0 0 22px 4px rgba(255, 60, 60, .55); }
+}
+
+/* ---------- Cena e cubo ---------- */
+
+/* Área onde o cubo fica centralizado */
+main {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+/* A "cena" tem o tamanho fixo de uma face e é reduzida pelo JS para caber na janela */
+.scene {
+  flex: none;
+  width: 960px;
+  height: 480px;
+  perspective: 2400px;
+  /* zoom (e não transform: scale) redimensiona o layout e rasteriza o 3D já no tamanho final,
+     evitando traços finos nas emendas dos blocos da GPU */
+  zoom: var(--scale, 1);
+  background: transparent;
+}
+
+.cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateZ(-480px) rotateY(calc(var(--giro, 0) * -90deg));
+  transition: transform 0.8s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+
+/* Cada face é um lado da caixa: madeira escura, friso de latão e rebites nos cantos */
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  transform: rotateY(calc(var(--n) * 90deg)) translateZ(480px);
+  pointer-events: none;
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  border: 3px solid var(--brass-dark);
+  background:
+    /* rebites */
+    radial-gradient(circle at 13px 13px, var(--brass-light) 0 2px, var(--brass) 3px 4px, var(--brass-dark) 5px 6px, transparent 7px),
+    radial-gradient(circle at calc(100% - 13px) 13px, var(--brass-light) 0 2px, var(--brass) 3px 4px, var(--brass-dark) 5px 6px, transparent 7px),
+    radial-gradient(circle at 13px calc(100% - 13px), var(--brass-light) 0 2px, var(--brass) 3px 4px, var(--brass-dark) 5px 6px, transparent 7px),
+    radial-gradient(circle at calc(100% - 13px) calc(100% - 13px), var(--brass-light) 0 2px, var(--brass) 3px 4px, var(--brass-dark) 5px 6px, transparent 7px),
+    /* veios da madeira */
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .025) 0 2px, transparent 2px 9px),
+    linear-gradient(145deg, var(--wood-1), var(--wood-2) 60%, var(--wood-3));
+  box-shadow:
+    inset 0 0 0 2px rgba(243, 220, 154, .3),
+    inset 0 0 60px #000c,
+    0 24px 60px #000b;
+}
+
+.face.ativa {
+  pointer-events: auto;
+}
+
+/* faces de lado/de trás só existem durante o giro: evita traços finos (faces vistas de borda) */
+body:not(.girando) .face:not(.ativa) {
+  visibility: hidden;
+}
+
+/* o enigma final ganha um friso dourado mais forte */
+.face-final {
+  border-color: var(--brass);
+  box-shadow:
+    inset 0 0 0 2px rgba(243, 220, 154, .55),
+    inset 0 0 60px #000c,
+    0 0 40px rgba(201, 162, 75, .35),
+    0 24px 60px #000b;
+}
+
+.face-final .painel {
+  max-width: 100%;
+}
+
+/* ---------- Painéis (páginas de pergaminho) ---------- */
+
+.painel {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 16px 22px 20px;
+  border: 2px solid var(--brass-dark);
+  border-radius: 8px;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, .55), transparent 60%),
+    linear-gradient(180deg, var(--parch-1), var(--parch-2));
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 245, 210, .6),
+    inset 0 0 34px rgba(122, 82, 20, .3),
+    0 6px 16px #0007;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brass) transparent;
+}
+
+/* cantoneiras ornamentais em todos os painéis */
+.painel::before,
+.painel::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 0 solid var(--brass-dark, #7a5320);
+  pointer-events: none;
+}
+.painel::before { top: 8px; left: 8px; border-top-width: 2px; border-left-width: 2px; }
+.painel::after { bottom: 8px; right: 8px; border-bottom-width: 2px; border-right-width: 2px; }
+
+.painel h2 {
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  font-size: .95rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  color: var(--wine);
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, var(--brass-dark), var(--brass), transparent) 1;
+}
+
+.painel h2::before {
+  content: "◆";
+  margin-right: .6em;
+  color: var(--brass-dark);
+  font-size: .7em;
+  vertical-align: .1em;
+}
+
+.painel p {
+  margin: .5rem 0;
+}
+
+/* enigmas centralizados; títulos continuam à esquerda */
+.painel .conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* listas e grades: bloco centralizado, texto à esquerda */
+.a2-lista,
+.a5-placas,
+.a5-painel,
+.a6-arvore {
+  text-align: left;
+}
+
+/* trancado: escurece e mostra um cadeado */
+.painel.locked {
+  pointer-events: none;
+  filter: grayscale(.5) brightness(.75);
+}
+
+.painel.locked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border: 0;
+  background: rgba(26, 15, 7, .55);
+  backdrop-filter: blur(4px);
+  border-radius: 6px;
+}
+
+/* cadeado em SVG inline no traço dos ícones do jogo */
+.painel.locked::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 88px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  border: 0;
+  z-index: 1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 100'%3E%3Cg fill='none' stroke='%23c9a14a' stroke-width='5' stroke-linecap='round'%3E%3Crect x='22' y='44' width='44' height='36' rx='7' fill='%237a5320'/%3E%3Cpath d='M31 44 V34 a13 13 0 0 1 26 0 V44'/%3E%3C/g%3E%3Ccircle cx='44' cy='60' r='5' fill='%23e8cd8a'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 4px 8px #000a);
+  pointer-events: none;
+}
+
+/* resolvido: borda dourada e selo de cera no canto */
+.painel.resolved {
+  pointer-events: none;
+  border-color: var(--brass);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 245, 210, .6),
+    inset 0 0 34px rgba(122, 82, 20, .3),
+    0 0 18px rgba(243, 220, 154, .55),
+    0 6px 16px #0007;
+}
+
+.painel.resolved::after {
+  content: "✓";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #ffe9e9;
+  font: bold 1rem var(--serif);
+  background: radial-gradient(circle at 35% 30%, #d94a4a, var(--wine) 60%, #4d1010);
+  box-shadow: 0 2px 5px #0006, inset 0 0 0 2px rgba(255, 255, 255, .18);
+  transform: rotate(-8deg);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.shake {
+  animation: shake .3s;
+}
+
+.point {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 0;
+  background: #bbb;
+}
+
+.point.atual {
+  background: #1d4e89;
+}
+
+/* ícones do jogo (sprite assets/icones.svg; herdam a cor do texto) */
+.icone {
+  width: 1.4em;
+  height: 1.4em;
+  vertical-align: -0.25em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Botões e campos ---------- */
+
+button {
+  cursor: pointer;
+  padding: .4rem .8rem;
+  font-size: 1rem;
+}
+
+input {
+  font-size: 1rem;
+}
+
+/* :where() mantém especificidade zero, então os CSS de cada enigma ainda sobrescrevem */
+:where(.painel, .modal) button {
+  color: var(--ink);
+  font-weight: bold;
+  border: 1px solid var(--brass-dark);
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--brass-light), var(--brass));
+  box-shadow: 0 2px 0 var(--brass-dark), 0 3px 6px #0004;
+  transition: transform .08s, filter .15s;
+}
+
+:where(.painel, .modal) button:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+:where(.painel, .modal) button:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--brass-dark);
+}
+
+:where(.painel, .modal) button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+:where(.painel, .modal) input[type="text"],
+:where(.painel, .modal) input[type="number"],
+:where(.painel, .modal) input:not([type]) {
+  color: var(--ink);
+  padding: .35rem .5rem;
+  border: 1px solid #b89a5a;
+  border-radius: 6px;
+  background: #fffaf0;
+  box-shadow: inset 0 2px 4px rgba(122, 82, 20, .2);
+}
+
+:where(.painel, .modal) input:focus-visible,
+:where(.painel, .modal) button:focus-visible {
+  outline: 2px solid var(--wine);
+  outline-offset: 2px;
+}
+
+/* Reiniciar (topo) */
+.restart {
+  color: var(--brass-light);
+  border: 1px solid var(--brass-dark);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #2b1a0e, #150d06);
+  box-shadow: inset 0 0 0 1px rgba(243, 220, 154, .2), 0 4px 14px #0008;
+}
+
+.restart:hover {
+  color: #fff;
+  border-color: var(--brass);
+}
+
+/* Setas laterais */
+#arrow-left,
+#arrow-right {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--brass-dark);
+  color: var(--ink);
+  font-size: 1.1rem;
+  background: radial-gradient(circle at 35% 30%, var(--brass-light), var(--brass) 65%, var(--brass-dark));
+  box-shadow: 0 4px 12px #000a, inset 0 0 0 2px rgba(255, 255, 255, .25);
+  transition: transform .15s, filter .15s;
+}
+
+#arrow-left:hover,
+#arrow-right:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* ---------- Modais ---------- */
+
+.centralizer {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 6, 2, .72);
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  padding: 28px 32px;
+  max-width: 32rem;
+  margin: 1rem;
+  border: 3px solid var(--brass);
+  border-radius: 14px;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, .55), transparent 60%),
+    linear-gradient(180deg, var(--parch-1), var(--parch-2));
+  box-shadow:
+    inset 0 0 0 4px rgba(255, 245, 210, .6),
+    inset 0 0 40px rgba(122, 82, 20, .3),
+    0 0 40px rgba(201, 162, 75, .35),
+    0 20px 60px #000c;
+}
+
+.modal h2 {
+  margin-top: 0;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+
+.modal p {
+  line-height: 1.55;
+}
+
+.exib-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#win-modal.exib-modal > .modal { animation: win-in .45s cubic-bezier(.2, 1.4, .4, 1); }
+@keyframes win-in {
+  from { opacity: 0; transform: scale(.7); }
+  to { opacity: 1; transform: none; }
+}
+
+#win-titulo { text-align: center; }
+#win-ok { display: block; margin-left: auto; }
+#win-frase {
+  display: block;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: bold;
+  font-style: italic;
+  color: var(--brass-dark);
+  margin: .75rem 0;
+}
+
+#win-tempo {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+}
+
+#init-modal > .modal {
+  text-align: center;
+}
+
+#init-modal .modal p {
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+#init-modal .manual-link {
+  display: inline-block;
+  margin-left: .6rem;
+  margin-top: .5rem;
+  padding: .6rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--brass-light);
+  text-decoration: none;
+  background: linear-gradient(180deg, #2b1a0e, #150d06);
+  border: 1px solid var(--brass-dark);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(243, 220, 154, .2), 0 4px 14px #0008;
+}
+#init-modal .manual-link:hover { color: #fff; background: linear-gradient(180deg, #2b1a0e, #150d06); }
+
+#init-modal h2 {
+  font-size: 1.8rem;
+}
+
+#start {
+  margin-top: .5rem;
+  padding: .6rem 2rem;
+  font-size: 1.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube { transition: none; }
+  #watch.red-alert { animation: none; }
+  #win-modal.exib-modal > .modal { animation: none; }
+}

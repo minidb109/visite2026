@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1220">
+    <title>VISITE 2026: Manual do Player 2</title>
+    <link rel="stylesheet" href="css/manual.css">
+</head>
+<body>
+    <!-- NOTA DE REVISÃO (dono B): seções a5, a6 e final foram reconstruídas a partir do
+         plano porque o guia não está no repositório. Conferir cada texto contra o guia §6/§7
+         antes de publicar: nenhuma resposta direta pode vazar. -->
+    <header>
+        <span class="selo">Player 2</span>
+        <h1>VISITE 2026 <small>Manual do Player 2</small></h1>
+        <div class="ornamento" aria-hidden="true">◆</div>
+        <p class="intro">Você tem as dicas. O Player 1 tem os enigmas. Um não vê a tela do outro: conversem.</p>
+    </header>
+
+    <span id="nav-sentinela" aria-hidden="true"></span>
+    <nav aria-label="Enigmas">
+        <a href="#a1" title="1: Questione padrões" aria-label="1: Questione padrões">1</a>
+        <a href="#a2" title="2: Aprenda com seus erros" aria-label="2: Aprenda com seus erros">2</a>
+        <a href="#a3" title="3: Saia da zona de conforto" aria-label="3: Saia da zona de conforto">3</a>
+        <a href="#a4" title="4: Nunca pare de se transformar" aria-label="4: Nunca pare de se transformar">4</a>
+        <a href="#a5" title="5: O tribunal das vozes" aria-label="5: O tribunal das vozes">5</a>
+        <a href="#a6" title="6: A árvore das consequências" aria-label="6: A árvore das consequências">6</a>
+        <a href="#final" title="Final: Quem disse isso?" aria-label="Final: Quem disse isso?">F</a>
+    </nav>
+
+    <main>
+    <section id="a1">
+        <h2><span class="num">1</span>Enigma</h2>
+        <p>Todo padrão esconde o seu avesso. A mente adora completar sequências, e é justamente aí que ela se engana: aceitamos o óbvio sem examinar de onde ele vem. Desconfiem do que parece inevitável.</p>
+        <p>Quando a resposta certa parecer impossível, perguntem-se: o que nesta tela está <em>perguntando</em> alguma coisa? A dúvida também é um caminho. Toquem nela, e leiam tudo de novo.</p>
+    </section>
+
+    <section id="a2">
+        <h2><span class="num">2</span>Enigma</h2>
+        <p>O cadeado tem 3 dígitos, cada um de 0 a 9. A cada tentativa, cada dígito recebe um símbolo:</p>
+        <ul>
+            <li><span class="tag certo">CERTO</span> o dígito está na posição certa.</li>
+            <li><span class="tag posicao">POSIÇÃO ERRADA</span> o dígito existe no código, mas em outra posição.</li>
+            <li><span class="tag ausente">AUSENTE</span> o dígito não faz parte do código (ou as ocorrências dele já foram usadas).</li>
+        </ul>
+        <p>Os símbolos mudam a cada tentativa, sempre nesta ordem, e se repetem a cada 5 tentativas. O histórico fica na tela e nada se apaga.</p>
+        <div class="tabela">
+        <table class="icones">
+            <thead>
+            <tr><th>Nº</th><th>CERTO</th><th>POSIÇÃO ERRADA</th><th>AUSENTE</th></tr>
+            </thead>
+            <tbody>
+            <tr><td>1</td><td><svg class="icone"><use href="assets/icones.svg#sol"/></svg> Sol</td><td><svg class="icone"><use href="assets/icones.svg#lua"/></svg> Lua</td><td><svg class="icone"><use href="assets/icones.svg#gota"/></svg> Gota</td></tr>
+            <tr><td>2</td><td><svg class="icone"><use href="assets/icones.svg#estrela"/></svg> Estrela</td><td><svg class="icone"><use href="assets/icones.svg#folha"/></svg> Folha</td><td><svg class="icone"><use href="assets/icones.svg#montanha"/></svg> Montanha</td></tr>
+            <tr><td>3</td><td><svg class="icone"><use href="assets/icones.svg#chave"/></svg> Chave</td><td><svg class="icone"><use href="assets/icones.svg#ancora"/></svg> Âncora</td><td><svg class="icone"><use href="assets/icones.svg#sino"/></svg> Sino</td></tr>
+            <tr><td>4</td><td><svg class="icone"><use href="assets/icones.svg#coroa"/></svg> Coroa</td><td><svg class="icone"><use href="assets/icones.svg#olho"/></svg> Olho</td><td><svg class="icone"><use href="assets/icones.svg#raio"/></svg> Raio</td></tr>
+            <tr><td>5</td><td><svg class="icone"><use href="assets/icones.svg#concha"/></svg> Concha</td><td><svg class="icone"><use href="assets/icones.svg#chama"/></svg> Chama</td><td><svg class="icone"><use href="assets/icones.svg#nuvem"/></svg> Nuvem</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p class="aviso">Dígitos podem se repetir. Não há limite de tentativas: errou, tenta de novo.</p>
+    </section>
+
+    <section id="a3">
+        <h2><span class="num">3</span>Enigma</h2>
+        <p>A grade tem 16 botões quadrados. A cada partida, 4 deles se destacam acesos em um formato, e mudam de lugar a cada jogo. O formato diz quais botões apertar:</p>
+        <div class="tabela">
+        <table>
+            <thead><tr><th>Zona acesa</th><th>Aperte</th></tr></thead>
+            <tbody>
+            <tr><td>Quadrado (bloco 2 × 2)</td><td>os 4 cantos: <code>A1</code> <code>A4</code> <code>D1</code> <code>D4</code></td></tr>
+            <tr><td>Linha (fileira)</td><td>os 4 do meio de cima e de baixo: <code>A2</code> <code>A3</code> <code>D2</code> <code>D3</code></td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p>Cada símbolo da grade tem um lugar na lista de conforto:</p>
+        <div class="tabela">
+        <table>
+            <thead><tr><th>Nº</th><th>Símbolo</th><th>Nº</th><th>Símbolo</th></tr></thead>
+            <tbody>
+            <tr><td>1</td><td>Círculo</td><td>9</td><td>Sol</td></tr>
+            <tr><td>2</td><td>Quadrado</td><td>10</td><td>Cruz</td></tr>
+            <tr><td>3</td><td>Triângulo</td><td>11</td><td>X</td></tr>
+            <tr><td>4</td><td>Losango</td><td>12</td><td>Nota</td></tr>
+            <tr><td>5</td><td>Estrela</td><td>13</td><td>Raio</td></tr>
+            <tr><td>6</td><td>Coração</td><td>14</td><td>Flor</td></tr>
+            <tr><td>7</td><td>Trevo</td><td>15</td><td>Folha</td></tr>
+            <tr><td>8</td><td>Lua</td><td>16</td><td>Chave</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p>A ordem de apertar esses 4 botões depende do último dígito da série mostrada na tela: se for <strong>par</strong>, do menor para o maior; se for <strong>ímpar</strong>, do maior para o menor.</p>
+        <p class="aviso">A série e a grade mudam a cada partida. Errar zera o progresso; 3 erros seguidos deixam a zona instável por alguns segundos.</p>
+    </section>
+
+    <section id="a4">
+        <h2><span class="num">4</span>Enigma</h2>
+        <p>A palavra de 4 letras muda a cada botão. Cada botão faz uma transformação diferente, que depende de quantas vezes você já apertou:</p>
+        <ul>
+            <li><span class="tag botao">ESQ</span> a 1ª letra vai para o fim (<code>MORA → ORAM</code>).</li>
+            <li><span class="tag botao">DIR</span> a última letra vai para o começo (<code>MORA → AMOR</code>).</li>
+            <li><span class="tag botao">PAR</span> troca 1ª com 2ª e 3ª com 4ª (<code>MORA → OMAR</code>).</li>
+            <li><span class="tag botao">EXT</span> troca a 1ª com a última (<code>MORA → AORM</code>).</li>
+            <li><span class="tag botao">MEI</span> troca as duas do meio (<code>MORA → MROA</code>).</li>
+        </ul>
+        <div class="tabela">
+        <table class="compacta">
+            <thead><tr><th>Aperto</th><th>Botão 1</th><th>Botão 2</th><th>Botão 3</th><th>Botão 4</th></tr></thead>
+            <tbody>
+            <tr><td>1º</td><td>ESQ</td><td>EXT</td><td>PAR</td><td>MEI</td></tr>
+            <tr><td>2º</td><td>MEI</td><td>DIR</td><td>EXT</td><td>PAR</td></tr>
+            <tr><td>3º</td><td>MEI</td><td>ESQ</td><td>PAR</td><td>EXT</td></tr>
+            <tr><td>4º</td><td>MEI</td><td>DIR</td><td>PAR</td><td>EXT</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p class="aviso">Chegue ao alvo em até 4 apertos. Se o caminho não tiver mais jeito, a palavra retorna ao início.</p>
+    </section>
+
+    <section id="a5">
+        <h2><span class="num">5</span>Enigma</h2>
+        <!-- REVISÃO: regras reconstruídas do plano; conferir verbatim contra o guia §6 a5. -->
+        <p>Cinco placas, um veredito para cada uma. Julguem por esta ordem:</p>
+        <ol>
+            <li><strong>O problema existe de verdade?</strong> Se não, se é só moda ou gosto pessoal, <strong>REJEITAR</strong>.</li>
+            <li><strong>O pedido resolve sem destruir o projeto?</strong> Se sim, <strong>ACEITAR</strong>.</li>
+            <li><strong>O pedido é exagerado ou tem um jeito melhor de resolver?</strong> <strong>ADAPTAR</strong>.</li>
+        </ol>
+        <p class="aviso">Uma crítica que pede mudanças não é rejeição só por isso.</p>
+        <p>Julguem as 5 placas e testem a fechadura. Dá para refazer um julgamento antes de testar.</p>
+    </section>
+
+    <section id="a6">
+        <h2><span class="num">6</span>Enigma</h2>
+        <!-- REVISÃO: frases reconstruídas do plano; conferir verbatim contra o guia §6 a6. -->
+        <p>Seis pedras, seis casas numeradas. Cada frase descreve uma pedra. Descubram qual é qual e coloquem cada uma na casa do número da frase:</p>
+        <ol>
+            <li>Aponta sempre para o mesmo ponto, por mais que o mundo gire.</li>
+            <li>Guarda palavras que só existem quando alguém as lê.</li>
+            <li>Tem os pés na terra e a cabeça no céu.</li>
+            <li>Serve para contar histórias que ainda não aconteceram.</li>
+            <li>Mede aquilo que ninguém consegue guardar.</li>
+            <li>Mostram que alguém passou por ali.</li>
+        </ol>
+        <p class="aviso">Erros seguidos deixam a árvore imóvel por um tempo. A fechadura não diz quantas casas estão certas.</p>
+    </section>
+
+    <section id="final">
+        <h2><span class="num">F</span>Final: Quem disse isso?</h2>
+        <p>Seis filósofos, seis frases. Usem as dicas do caderninho para descobrir de quem é a frase certa, e digam o nome dele na fechadura:</p>
+        <div class="tabela">
+        <table class="frases">
+            <thead><tr><th>Filósofo</th><th>Frase</th></tr></thead>
+            <tbody>
+            <tr><td>Sócrates</td><td>Só sei que nada sei.</td></tr>
+            <tr><td>Descartes</td><td>Penso, logo existo.</td></tr>
+            <tr><td>Kant</td><td>Ousa saber.</td></tr>
+            <tr><td>Nietzsche</td><td>Torna-te quem tu és.</td></tr>
+            <tr><td>Sartre</td><td>A existência precede a essência.</td></tr>
+            <tr><td>Heráclito</td><td>Ninguém entra duas vezes no mesmo rio.</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+    </main>
+
+    <footer aria-hidden="true">◆ VISITE 2026 ◆</footer>
+    <script>
+    (function () {
+      var nav = document.querySelector('nav');
+      var sent = document.getElementById('nav-sentinela');
+      if (!nav || !sent || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (entries) {
+        nav.classList.toggle('presa', !entries[0].isIntersecting);
+      }).observe(sent);
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* dono: A -> a1,a2,a6,final; B -> a3,a4,a5 */
+.a5-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 10px; }
+.a5-cont { font-size: .9rem; min-width: 3.2rem; text-align: center; }
+.a5-cartoes { display: flex; flex-direction: column; gap: 10px; }
+.a5-cartao { border: 1px solid #b08d57; border-radius: 8px; padding: 10px 12px; background: #fffdf4; }
+.a5-cartao h4 { margin: 0 0 4px; font-size: 1.05rem; font-weight: bold; }
+.a5-cartao p { margin: 0 0 8px; font-size: .9rem; }
+.a5-acoes { display: flex; gap: 8px; }
+.a5-acoes button.escolhido { outline: 3px solid var(--brass-dark); outline-offset: 1px; background: linear-gradient(to bottom, var(--gold), var(--brass)); font-weight: bold; box-shadow: 0 0 10px rgba(255,215,106,.8), 0 2px 0 var(--brass-dark); transform: scale(1.06); }
+.a5-cartao.errado { animation: a5-pisca 0.5s 5; border-color: var(--danger, #b3261e); }
+@keyframes a5-pisca { 50% { background: #f6d9a0; } }
+.a5-cartao.entra-dir { animation: a5-entra-dir .45s ease-out; }
+.a5-cartao.entra-esq { animation: a5-entra-esq .45s ease-out; }
+@keyframes a5-entra-dir { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+@keyframes a5-entra-esq { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .a5-cartao.entra-dir, .a5-cartao.entra-esq { animation: none; }
+}
+.a5-testar { margin-top: 10px; }
+.a5-testar:disabled { opacity: .5; }
+.a5-msg { min-height: 1.2em; }
+#a5 .aberta { outline: 2px solid var(--brass); outline-offset: 4px; border-radius: 6px; }

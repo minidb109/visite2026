@@ -1,0 +1,10 @@
+/* dono: A -> a1,a2,a6,final; B -> a3,a4,a5 */
+#a1 { display: flex; flex-direction: column; position: relative; overflow: hidden; }
+#a1 .conteudo { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-bottom: 48px; box-sizing: border-box; position: relative; z-index: 1; }
+.a1-seq { font-size: 1.6rem; margin: 16px 0; letter-spacing: .08em; }
+.a1-linha { display: flex; gap: 8px; align-items: center; }
+.a1-campo { width: 6rem; font-size: 1.2rem; box-sizing: border-box; -moz-appearance: textfield; appearance: textfield; }
+.a1-campo::-webkit-outer-spin-button,
+.a1-campo::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.a1-q { cursor: pointer; color: inherit; font-weight: inherit; border-bottom: none; }
+.a1-msg { min-height: 1.2em; }

@@ -1,0 +1,4 @@
+/* dono: A -> a1,a2,a6,final; B -> a3,a4,a5 */
+.a4-palavra { font-size: 2.2rem; letter-spacing: .5rem; font-weight: bold; color: var(--wine); }
+.a4-botoes { display: flex; gap: 8px; }
+.a4-botoes button { width: 2.6rem; height: 2.6rem; font-size: 1.2rem; box-sizing: border-box; padding: 0; }

@@ -1,0 +1,9 @@
+/* dono: A -> a1,a2,a6,final; B -> a3,a4,a5 */
+.a6-pedras { display: flex; gap: 8px; font-size: 1.6rem; }
+.a6-pedra.sel { outline: 3px solid var(--wine); outline-offset: 2px; }
+.a6-arvore { list-style: none; margin: 12px auto 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; width: 100%; max-width: 16rem; }
+.a6-arvore li { min-width: 0; }
+.a6-casa { width: 100%; min-width: 0; height: 2.6rem; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: .3rem; white-space: nowrap; overflow: hidden; }
+.a6-msg { min-height: 1.2em; }
+.a6-ok { margin-top: 12px; }
+#a6 .floresce { outline: 3px solid #2f7d32; outline-offset: 4px; border-radius: 6px; }

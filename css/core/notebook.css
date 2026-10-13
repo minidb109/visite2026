@@ -1,0 +1,197 @@
+#notebook-toggle {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 20;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    border: 2px solid var(--brass-dark);
+    background: radial-gradient(circle at 35% 30%, var(--brass-light), var(--brass) 65%, var(--brass-dark));
+    box-shadow: 0 4px 12px #000a, inset 0 0 0 2px rgba(255, 255, 255, .25);
+    transition: transform .15s;
+}
+
+#notebook-toggle:hover {
+    transform: scale(1.1) rotate(-6deg);
+}
+
+/* ---------- Caderninho: livro aberto com duas páginas ---------- */
+
+#notebook-modal {
+    background: rgba(10, 6, 2, .82);
+    backdrop-filter: blur(3px);
+}
+
+#notebook {
+    position: relative;
+    box-sizing: border-box;
+    width: min(54rem, 94vw);
+    max-width: none;
+    max-height: 88vh;
+    overflow: auto;
+    margin: 0;
+    padding: 1.1rem 2.2rem 1.6rem;
+    text-align: left;
+    border: 0;
+    border-radius: 6px;
+    /* capa de couro em volta + papel + sombra da lombada no centro */
+    background:
+        linear-gradient(90deg,
+            rgba(43, 29, 14, .30) 0, transparent 7%,
+            transparent 44%, rgba(43, 29, 14, .22) 49.4%, rgba(43, 29, 14, .5) 50%, rgba(43, 29, 14, .22) 50.6%, transparent 56%,
+            transparent 93%, rgba(43, 29, 14, .30) 100%),
+        linear-gradient(180deg, #f8f0dc, #eadbb5);
+    box-shadow:
+        0 0 0 7px #2b1d0e,
+        0 0 0 9px var(--brass-dark),
+        0 34px 90px #000e,
+        0 8px 22px #000c;
+}
+
+#notebook-close {
+    position: absolute;
+    top: .6rem;
+    right: 1.4rem;
+    z-index: 2;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+/* (título removido do HTML; regras de título inativas) */
+
+#notebook h3 {
+    margin: 0 0 .6rem;
+    padding-bottom: .35rem;
+    font-size: .8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--wine);
+    border-bottom: 1px solid rgba(122, 90, 30, .45);
+}
+
+/* duas páginas de mesma largura, alinhadas com a lombada */
+.nb-colunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3.2rem;
+    align-items: stretch;
+}
+
+.nb-escrever,
+.nb-frases {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* página da esquerda: folha pautada */
+#notebook-text {
+    flex: 1;
+    width: 100%;
+    min-height: 16rem;
+    box-sizing: border-box;
+    padding: 0 .2rem;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 2rem;
+    color: #23180c;
+    resize: none;
+    border: 0;
+    border-radius: 0;
+    background:
+        repeating-linear-gradient(180deg, transparent 0 calc(2rem - 1px), rgba(43, 90, 150, .28) calc(2rem - 1px) 2rem)
+        local;
+    box-shadow: none;
+}
+
+#notebook-text::placeholder {
+    color: rgba(107, 90, 69, .65);
+    font-style: italic;
+}
+
+#notebook-text:focus-visible {
+    outline: none;
+}
+
+/* página da direita: frases dos enigmas resolvidos, com selo de cera */
+#notebook-shelf {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: .95rem;
+    line-height: 1.35;
+}
+
+#notebook-shelf li {
+    position: relative;
+    margin: 0 0 .7rem;
+    padding: .15rem 0 .15rem 2.3rem;
+    min-height: 1.6rem;
+    animation: nb-aparece .5s ease-out;
+}
+
+#notebook-shelf li::before {
+    content: "?";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #ffe9e9;
+    font-size: .8rem;
+    font-weight: bold;
+    background: radial-gradient(circle at 35% 30%, #d94a4a, var(--wine) 60%, #4d1010);
+    box-shadow: 0 2px 4px #0005, inset 0 0 0 2px rgba(255, 255, 255, .18);
+    transform: rotate(-8deg);
+}
+
+/* o selo mostra o número do enigma (não a ordem em que foi resolvido) */
+#notebook-shelf li[data-id="a1"]::before { content: "1"; }
+#notebook-shelf li[data-id="a2"]::before { content: "2"; }
+#notebook-shelf li[data-id="a3"]::before { content: "3"; }
+#notebook-shelf li[data-id="a4"]::before { content: "4"; }
+#notebook-shelf li[data-id="a5"]::before { content: "5"; }
+#notebook-shelf li[data-id="a6"]::before { content: "6"; }
+#notebook-shelf li[data-id="final"]::before { content: "★"; }
+
+#notebook-shelf:empty::after {
+    content: "Nenhum enigma resolvido ainda.";
+    color: var(--ink-soft);
+    font-style: italic;
+}
+
+@keyframes nb-aparece {
+    from { opacity: 0; transform: translateY(4px); }
+}
+
+/* celular: páginas empilhadas, sem lombada */
+@media (max-width: 640px) {
+    #notebook {
+        padding: 1rem 1.6rem 1.3rem;
+        background: linear-gradient(180deg, #f8f0dc, #eadbb5);
+    }
+    #notebook h2 {
+        display: block;
+        text-align: center;
+    }
+    #notebook h2 .nb-t1 { margin-right: 0; }
+    .nb-colunas {
+        grid-template-columns: 1fr;
+        row-gap: 1.2rem;
+    }
+    #notebook-text { min-height: 10rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #notebook-shelf li { animation: none; }
+}
